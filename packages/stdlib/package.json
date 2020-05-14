@@ -1,0 +1,41 @@
+{
+  "name": "@consolerad.io/stdlib",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [],
+  "author": {
+    "name": "Udi Talias",
+    "email": "udi@vidazoo.com",
+    "url": "https://github.com/uditalias"
+  },
+  "license": "MIT",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/consoleradio/consolerad.io-transmitter.git"
+  },
+  "scripts": {
+    "start": "npm run tsc:watch",
+    "build": "npm run tsc",
+    "tsc": "tsc",
+    "tsc:watch": "tsc -w"
+  },
+  "bugs": {
+    "url": "https://github.com/consoleradio/consolerad.io-transmitter/issues"
+  },
+  "homepage": "https://github.com/consoleradio/consolerad.io-transmitter#readme",
+  "devDependencies": {
+    "@types/node": "^13.13.5",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "tslib": "^1.11.2"
+  }
+}

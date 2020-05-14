@@ -1,0 +1,11 @@
+.vscode
+.idea
+*.log
+node_modules
+
+# Packages
+packages/browser/lib
+packages/browser/umd
+
+packages/stdlib/lib
+packages/stdlib/lib
