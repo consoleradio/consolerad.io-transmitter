@@ -4,6 +4,7 @@ export enum Command {
     QuerySelectorAll = "querySelectorAll",
     GetBoundingClientRect = "getBoundingClientRect",
     Execute = "execute",
+    Ping = "ping",
 }
 
 export enum Watch {
