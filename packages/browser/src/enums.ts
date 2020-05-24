@@ -10,7 +10,8 @@ export enum Command {
 export enum Watch {
     WindowSize = "windowSize",
     WindowScroll = "windowScroll",
-    Intersection = "intersection"
+    Intersection = "intersection",
+    MediaQuery = "mediaQuery"
 }
 
 export enum ActionResultStatus {

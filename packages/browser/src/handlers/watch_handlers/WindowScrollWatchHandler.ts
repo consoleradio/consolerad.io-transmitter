@@ -2,7 +2,7 @@ import { Watch } from "../../enums";
 import BaseWatchHandler from "./BaseWatchHandler";
 import { throttle } from "@consolerad.io/stdlib/lib/timing";
 
-export default class WindowScrollWatchHandler extends BaseWatchHandler {
+export default class WindowScrollWatchHandler extends BaseWatchHandler<{ scrollX: number; scrollY: number; }> {
 
     public static readonly handles = Watch.WindowScroll;
     private _throttleValue: number;
