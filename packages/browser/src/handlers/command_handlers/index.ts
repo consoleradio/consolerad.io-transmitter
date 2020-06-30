@@ -4,3 +4,5 @@ export { default as QuerySelectorAllCommandHandler } from "./QuerySelectorAllCom
 export { default as GetBoundingClientRectCommandHandler } from "./GetBoundingClientRectCommandHandler";
 export { default as ExecuteCommandHandler } from "./ExecuteCommandHandler";
 export { default as PingCommandHandler } from "./PingCommandHandler";
+export { default as SetElementStyleCommandHandler } from "./SetElementStyleCommandHandler";
+export { default as InjectCSSCommandHandler } from "./InjectCSSCommandHandler";

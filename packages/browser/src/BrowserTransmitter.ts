@@ -53,6 +53,8 @@ export default class BrowserTransmitter extends SocketClient implements IWatchMa
     constructor(consoleId: string, options: ITransmitterOptions = {}) {
         super(process.env.BASE_URL, process.env.AMPLIFIERS_NS);
 
+        this._onConsoleInvoke = this._onConsoleInvoke.bind(this);
+
         this._consoleId = consoleId;
         this._options = defaults(options);
 

@@ -5,6 +5,8 @@ export enum Command {
     GetBoundingClientRect = "getBoundingClientRect",
     Execute = "execute",
     Ping = "ping",
+    SetElementStyle = "setElementStyle",
+    InjectCSS = "injectCSS",
 }
 
 export enum Watch {
