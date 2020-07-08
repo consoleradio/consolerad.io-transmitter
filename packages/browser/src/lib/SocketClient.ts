@@ -19,7 +19,7 @@ export default abstract class SocketClient extends EventDispatcher {
     public async initialize(options: SocketIOClient.ConnectOpts = {}) {
         this.socket = io(`${this.url}/${this.namespace}`, {
             ...options,
-            transports: ["websocket"],
+            transports: ["websocket", "polling"],
             reconnectionAttempts: Infinity
         });
 

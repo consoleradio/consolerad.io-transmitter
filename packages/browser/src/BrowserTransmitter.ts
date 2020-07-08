@@ -20,18 +20,20 @@ interface IAuthorizationData {
 }
 
 interface ICommand {
+    uid: string;
     cid: string;
     aid: string;
     id: string;
     cmd: Command;
-    args: any[];
+    params: any;
 }
 
 interface IWatch {
+    uid: string;
     cid: string;
     aid: string;
     watch: Watch;
-    args: any[];
+    params: any;
 }
 
 const commandManager = Symbol("commandManager");
@@ -126,14 +128,18 @@ export default class BrowserTransmitter extends SocketClient implements IWatchMa
             error = null;
 
         try {
-            response = await this[commandManager].handle(command.cmd, ...command.args);
+            response = await this[commandManager].handle(command.cmd, command.params);
         } catch (err) {
-            error = err;
+            error = {
+                message: err.toString(),
+                error: err
+            };
             status = ActionResultStatus.Error;
         }
 
         this.emit("command:response", {
             id: command.id,
+            uid: command.uid,
             cid: command.cid,
             aid: command.aid,
             cmd: command.cmd,
@@ -153,14 +159,18 @@ export default class BrowserTransmitter extends SocketClient implements IWatchMa
             error = null;
 
         try {
-            watcherId = this[watchManager].watch(watch.watch, ...watch.args);
+            watcherId = this[watchManager].watch(watch.watch, watch.params, watch.uid);
         } catch (err) {
-            error = err;
+            error = {
+                message: err.toString(),
+                error: err
+            };
             status = ActionResultStatus.Error;
         }
 
         this.emit("watch:response", {
             watch: watch.watch,
+            uid: watch.uid,
             cid: watch.cid,
             aid: watch.aid,
             id: watcherId,
@@ -170,8 +180,17 @@ export default class BrowserTransmitter extends SocketClient implements IWatchMa
     }
 
     public watchManagerDidReceiveUpdate(_: WatchManager, watcherId: string, ...args: any[]): void {
+        const watcher = _.getWatchInstance(watcherId);
+
+        if (!watcher) {
+            return;
+        }
+
         this.emit("watch:data", {
             id: watcherId,
+            uid: watcher.userId,
+            cid: this._consoleId,
+            aid: this._amplifierId,
             args
         });
     }

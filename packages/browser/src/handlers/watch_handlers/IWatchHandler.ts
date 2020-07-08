@@ -1,5 +1,3 @@
-import { ConsoleMethod } from "@consolerad.io/stdlib/lib/enums";
-import IHandler from "@consolerad.io/stdlib/lib/interfaces/IHandler";
 import IConstructor from "@consolerad.io/stdlib/lib/interfaces/IConstructor";
 import { Watch } from "../../enums";
 
@@ -9,7 +7,8 @@ export interface IWatchHandlerConstructor extends IConstructor<IWatchHandler> {
 
 export default interface IWatchHandler {
     id: string;
+    userId: string;
     setUpdater(updater: (...args: any[]) => void): void;
-    watch(...args: any[]): void;
+    watch(params: any): void;
     willDestroy(): void | Promise<void>;
 }

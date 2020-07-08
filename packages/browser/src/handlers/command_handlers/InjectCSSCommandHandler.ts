@@ -6,7 +6,7 @@ export default class InjectCSSCommandHandler implements ICommandHandler {
 
     public readonly handles = Command.InjectCSS;
 
-    public handle(css: string): void {
-        injectStyleRules(css);
+    public handle(params: { css: string; }): void {
+        injectStyleRules(params.css);
     }
 }

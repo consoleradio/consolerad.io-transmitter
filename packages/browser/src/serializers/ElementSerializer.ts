@@ -17,6 +17,7 @@ export interface ISerializedElement {
     clientLeft: number;
     clientHeight: number;
     attributes: INameValuePair[];
+    rect: ClientRect;
 }
 
 export default class ElementSerializer {
@@ -47,7 +48,8 @@ export default class ElementSerializer {
             clientTop: element.clientTop,
             clientLeft: element.clientLeft,
             clientHeight: element.clientHeight,
-            attributes: this._serializeAttributes(element.attributes)
+            attributes: this._serializeAttributes(element.attributes),
+            rect: this._serializeRect(element.getBoundingClientRect())
         };
     }
 
@@ -57,5 +59,16 @@ export default class ElementSerializer {
 
     private _serializeAttributes(attributes: NamedNodeMap): INameValuePair[] {
         return toArray(attributes).map(({ name, value }) => ({ name, value }));
+    }
+
+    private _serializeRect(rect: ClientRect): ClientRect {
+        return {
+            left: rect.left,
+            top: rect.top,
+            width: rect.width,
+            height: rect.height,
+            bottom: rect.bottom,
+            right: rect.right
+        };
     }
 }

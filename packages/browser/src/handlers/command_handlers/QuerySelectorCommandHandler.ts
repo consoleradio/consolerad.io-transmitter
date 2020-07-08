@@ -6,8 +6,8 @@ export default class QuerySelectorCommandHandler implements ICommandHandler {
 
     public readonly handles = Command.QuerySelector;
 
-    public handle(query: string): Promise<ISerializedElement> {
-        const element = document.querySelector(query);
+    public handle(params: { selector: string; }): Promise<ISerializedElement> {
+        const element = document.querySelector(params.selector);
 
         return ElementSerializer.create().serializeAsync(element);
     }

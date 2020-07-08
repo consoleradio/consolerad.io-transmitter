@@ -13,7 +13,8 @@ export enum Watch {
     WindowSize = "windowSize",
     WindowScroll = "windowScroll",
     Intersection = "intersection",
-    MediaQuery = "mediaQuery"
+    MediaQuery = "mediaQuery",
+    ScreenRotation = "screenRotation",
 }
 
 export enum ActionResultStatus {

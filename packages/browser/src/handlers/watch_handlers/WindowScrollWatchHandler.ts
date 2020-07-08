@@ -7,7 +7,7 @@ export default class WindowScrollWatchHandler extends BaseWatchHandler<{ scrollX
     public static readonly handles = Watch.WindowScroll;
     private _throttleValue: number;
 
-    public watch(throttleValue: number = 100): void {
+    public watch({ throttleValue = 100 }: { throttleValue: number; }): void {
         this._throttleValue = Math.max(throttleValue, 0);
         window.addEventListener("scroll", this._onWindowScroll, { passive: true });
     }

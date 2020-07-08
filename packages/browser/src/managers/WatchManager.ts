@@ -36,18 +36,22 @@ export default class WatchManager {
         return this._handlers.has(watch);
     }
 
-    public watch(watch: Watch, ...args: any[]): string {
+    public getWatchInstance(watcherId: string): IWatchHandler {
+        return this._watchers.get(watcherId);
+    }
+
+    public watch(watch: Watch, params: any, userId: string): string {
         if (this.canHandle(watch)) {
             const WatcherConstructor = this._handlers.get(watch);
 
-            const watcher = new WatcherConstructor();
+            const watcher = new WatcherConstructor(userId);
 
             watcher.setUpdater(this._createUpdaterFn(watcher));
 
             this._watchers.set(watcher.id, watcher);
 
             try {
-                watcher.watch(...args);
+                watcher.watch(params);
             } catch (e) {
                 this.destroy(watcher.id);
 
@@ -70,7 +74,7 @@ export default class WatchManager {
 
     private _createUpdaterFn(watcher: IWatchHandler): (...args: any[]) => void {
         return (...args: any[]) => {
-            this._invokeDelegateFn("watchManagerDidReceiveUpdate", [watcher.id, ...args]);
+            this._invokeDelegateFn("watchManagerDidReceiveUpdate", watcher.id, ...args);
         }
     }
 

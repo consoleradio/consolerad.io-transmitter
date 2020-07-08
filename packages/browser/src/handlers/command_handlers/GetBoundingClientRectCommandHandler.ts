@@ -5,8 +5,8 @@ export default class GetBoundingClientRectCommandHandler implements ICommandHand
 
     public readonly handles = Command.GetBoundingClientRect;
 
-    public handle(query: string): ClientRect {
-        const element = document.querySelector(query);
+    public handle(params: { selector: string; }): ClientRect {
+        const element = document.querySelector(params.selector);
 
         if (!element) {
             return null;

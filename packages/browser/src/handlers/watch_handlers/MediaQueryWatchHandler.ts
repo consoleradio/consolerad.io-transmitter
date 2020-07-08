@@ -6,8 +6,8 @@ export default class MediaQueryWatchHandler extends BaseWatchHandler<{ media: st
     public static readonly handles = Watch.MediaQuery;
     private _mediaQueryList: MediaQueryList;
 
-    public watch(query: string): void {
-        this._mediaQueryList = window.matchMedia(query);
+    public watch(params: { query: string; }): void {
+        this._mediaQueryList = window.matchMedia(params.query);
 
         this._mediaQueryList.addListener(this._onMediaChange);
     }

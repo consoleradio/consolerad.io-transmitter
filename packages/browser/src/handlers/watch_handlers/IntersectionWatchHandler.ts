@@ -19,15 +19,15 @@ export default class IntersectionWatchHandler extends BaseWatchHandler<IIntersec
     private _observer: IntersectionObserver;
     private _serializer: ElementSerializer;
 
-    public watch(selector: string, options: IntersectionObserverInit = {}): void {
+    public watch(params: { selector: string; options: IntersectionObserverInit; }): void {
 
-        const element = document.querySelector(selector);
+        const element = document.querySelector(params.selector);
 
         if (!element) {
             throw new Error(`${this.constructor.name}: element selector not found.`);
         }
 
-        this._observer = new IntersectionObserver(this._onIntersection, options);
+        this._observer = new IntersectionObserver(this._onIntersection, params.options || {});
 
         this._serializer = ElementSerializer.create();
 

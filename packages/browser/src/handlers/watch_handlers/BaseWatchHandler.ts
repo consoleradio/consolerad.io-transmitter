@@ -9,7 +9,7 @@ export default abstract class BaseWatchHandler<S = any> implements IWatchHandler
 
     protected update: (...args: any[]) => void;
 
-    constructor() {
+    constructor(public userId: string) {
         this.id = guid();
         this.state = null;
     }

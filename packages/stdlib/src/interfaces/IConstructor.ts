@@ -1,3 +1,3 @@
 export default interface IConsoleHandlerConstructor<T> {
-    new(): T;
+    new(...args: any[]): T;
 }
