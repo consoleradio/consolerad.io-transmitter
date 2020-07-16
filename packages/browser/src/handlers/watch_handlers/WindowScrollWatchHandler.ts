@@ -2,7 +2,12 @@ import { Watch } from "../../enums";
 import BaseWatchHandler from "./BaseWatchHandler";
 import { throttle } from "@consolerad.io/stdlib/lib/timing";
 
-export default class WindowScrollWatchHandler extends BaseWatchHandler<{ scrollX: number; scrollY: number; }> {
+interface IState {
+    scrollX: number;
+    scrollY: number;
+}
+
+export default class WindowScrollWatchHandler extends BaseWatchHandler<IState> {
 
     public static readonly handles = Watch.WindowScroll;
     private _throttleValue: number;
@@ -20,6 +25,10 @@ export default class WindowScrollWatchHandler extends BaseWatchHandler<{ scrollX
             });
         });
     }, this._throttleValue);
+
+    protected shouldUpdate(state: IState, nextState: IState): boolean {
+        return state === null || state.scrollX !== nextState.scrollX || state.scrollY !== nextState.scrollY;
+    }
 
     public willDestroy(): void | Promise<void> {
         window.removeEventListener("scroll", this._onWindowScroll);

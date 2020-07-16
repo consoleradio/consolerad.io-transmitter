@@ -6,6 +6,7 @@ import { KillCode } from "@consolerad.io/stdlib/lib/enums";
 import ConsoleManager from "./managers/ConsoleManager";
 import CommandManager from "./managers/CommandManager";
 import WatchManager, { IWatchManagerDelegate } from "./managers/WatchManager";
+import GlobalEventManager, { IGlobalEventManagerDelegate } from "./managers/GlobalEventManager";
 import { ICommandHandlerConstructor } from "./handlers/command_handlers/ICommandHandler";
 
 function defaults(options: Partial<ITransmitterOptions>): ITransmitterOptions {
@@ -39,8 +40,9 @@ interface IWatch {
 const commandManager = Symbol("commandManager");
 const consoleManager = Symbol("consoleManager");
 const watchManager = Symbol("watchManager");
+const globalEventManager = Symbol("globalEventManager");
 
-export default class BrowserTransmitter extends SocketClient implements IWatchManagerDelegate {
+export default class BrowserTransmitter extends SocketClient implements IWatchManagerDelegate, IGlobalEventManagerDelegate {
 
     private _consoleId: string;
     private _options: ITransmitterOptions;
@@ -51,6 +53,7 @@ export default class BrowserTransmitter extends SocketClient implements IWatchMa
     [commandManager]: CommandManager;
     [consoleManager]: ConsoleManager;
     [watchManager]: WatchManager;
+    [globalEventManager]: GlobalEventManager;
 
     constructor(consoleId: string, options: ITransmitterOptions = {}) {
         super(process.env.BASE_URL, process.env.AMPLIFIERS_NS);
@@ -62,9 +65,8 @@ export default class BrowserTransmitter extends SocketClient implements IWatchMa
 
         this[commandManager] = new CommandManager();
         this[consoleManager] = new ConsoleManager();
-        this[watchManager] = new WatchManager();
-
-        this[watchManager].delegate = this;
+        this[watchManager] = new WatchManager(this);
+        this[globalEventManager] = new GlobalEventManager(this);
     }
 
     public connect() {
@@ -191,6 +193,13 @@ export default class BrowserTransmitter extends SocketClient implements IWatchMa
             uid: watcher.userId,
             cid: this._consoleId,
             aid: this._amplifierId,
+            args
+        });
+    }
+
+    public globalEventManagerDidInvoke(_: GlobalEventManager, event: string, ...args: any[]): void {
+        this.emit("global:event", {
+            type: event,
             args
         });
     }

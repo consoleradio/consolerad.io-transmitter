@@ -12,7 +12,6 @@ export type InvokeEventArgs = {
     method: ConsoleMethod;
     args: any[];
     payload: {
-        time: number;
         [index: string]: any;
     };
 }
@@ -55,9 +54,7 @@ export default class ConsoleAdapter extends EventDispatcher<ConsoleAdapterEvent>
         this.dispatch<InvokeEventArgs>(ConsoleAdapterEvent.Invoke, {
             method,
             args,
-            payload: {
-                time: Date.now()
-            }
+            payload: {}
         });
     }
 }

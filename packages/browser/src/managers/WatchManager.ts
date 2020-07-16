@@ -11,9 +11,7 @@ export default class WatchManager {
     private _handlers: Map<Watch, IWatchHandlerConstructor>;
     private _watchers: Map<string, IWatchHandler>;
 
-    public delegate: IWatchManagerDelegate;
-
-    constructor() {
+    constructor(public delegate?: IWatchManagerDelegate) {
         this._handlers = new Map<Watch, IWatchHandlerConstructor>();
         this._watchers = new Map<Watch, IWatchHandler>();
 

@@ -22,11 +22,17 @@
             width: 100%;
         }
     </style>
+    <script>
+        function throwError() {
+            throw new Error("Boom!");
+        }
+    </script>
 
 </head>
 
 <body>
     <div class="container">
+        <button onClick="throwError();">throw error</button>
         <h1>Console Radio Transmitter</h1>
 
         <p>

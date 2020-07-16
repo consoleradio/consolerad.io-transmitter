@@ -26,7 +26,8 @@ export default abstract class SocketClient extends EventDispatcher {
         this.onInitialize();
     }
 
-    protected emit(event: string, params: any) {
+    protected emit(event: string, params: any = {}) {
+        params.__t = Date.now();
         this.socket.emit(event, params);
     }
 }
