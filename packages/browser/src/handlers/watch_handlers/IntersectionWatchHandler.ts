@@ -35,10 +35,23 @@ export default class IntersectionWatchHandler extends BaseWatchHandler<IIntersec
     }
 
     private _onIntersection = (entries: IntersectionObserverEntry[]) => {
-        const { target, ...others } = entries[0];
+        const {
+            boundingClientRect,
+            intersectionRatio,
+            intersectionRect,
+            isIntersecting,
+            rootBounds,
+            target,
+            time
+        } = entries[0];
 
         const state: IIntersectionState = {
-            ...others,
+            boundingClientRect,
+            intersectionRatio,
+            intersectionRect,
+            isIntersecting,
+            rootBounds,
+            time,
             target: this._serializer.serialize(target)
         };
 
@@ -46,7 +59,7 @@ export default class IntersectionWatchHandler extends BaseWatchHandler<IIntersec
     }
 
     protected shouldUpdate(state: IIntersectionState, nextState: IIntersectionState): boolean {
-        return state.isIntersecting !== nextState.isIntersecting;
+        return state === null || state.isIntersecting !== nextState.isIntersecting;
     }
 
     public willDestroy(): void | Promise<void> {

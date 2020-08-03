@@ -23,16 +23,52 @@
         }
     </style>
     <script>
+
+        const messages = [
+            function () {
+                console.log("Test Log Message", Date.now());
+            },
+            function () {
+                console.warn("This is a warning message", 1, 2, 3);
+            },
+            function () {
+                console.error("WOW! something went wrong here :(", new Error());
+            },
+            function () {
+                console.log("%cThis is soooo colorful %cAnd very purple %cAnd what else?!", "color: red;", "color: purple;", "");
+            }
+        ]
+
+        function invokeRandomMessage() {
+            const idx = Math.floor(Math.random() * messages.length);
+            messages[idx]();
+        }
+
         function throwError() {
             throw new Error("Boom!");
+        }
+
+        function toggleLogs() {
+            const btn = document.getElementById("toggleLogsBtn");
+            if (window.logsInterval) {
+                window.clearInterval(window.logsInterval);
+                window.logsInterval = null;
+                btn.innerText = "logs stream status: OFF";
+            } else {
+                window.logsInterval = setInterval(invokeRandomMessage, 500);
+                btn.innerText = "logs stream status: ON";
+            }
         }
     </script>
 
 </head>
 
 <body>
+
     <div class="container">
         <button onClick="throwError();">throw error</button>
+        <button onClick="toggleLogs();" id="toggleLogsBtn"></button>
+        <script>toggleLogs();</script>
         <h1>Console Radio Transmitter</h1>
 
         <p>
@@ -540,12 +576,6 @@
             dapibus turpis dapibus eu nisi hendrerit dapibus.
         </p>
     </div>
-    <script>
-        setInterval(() => {
-            console.log("Test Log Message", Date.now());
-        }, 500)
-
-    </script>
 </body>
 
 </html>
