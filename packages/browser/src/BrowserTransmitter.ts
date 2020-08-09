@@ -204,8 +204,8 @@ export default class BrowserTransmitter extends SocketClient implements IWatchMa
         });
     }
 
-    private async _onDestroyWatch(data: { watcherId: string; }) {
-        await this[watchManager].destroy(data.watcherId);
+    private async _onDestroyWatch(data: { wid: string; cid: string; aid: string; uid: string; }) {
+        await this[watchManager].destroy(data.wid);
     }
 
     private _onConsoleInvoke(event: CustomEvent<InvokeEventArgs>) {

@@ -7,10 +7,10 @@ export default class QuerySelectorAllCommandHandler implements ICommandHandler {
 
     public readonly handles = Command.QuerySelectorAll;
 
-    public handle(params: { selector: string; }): Promise<ISerializedElement[]> {
+    public handle(params: { selector: string; }): ISerializedElement[] {
         const elements = document.querySelectorAll(params.selector)
             , serializer = ElementSerializer.create();
 
-        return Promise.all(toArray(elements).map((element) => serializer.serializeAsync(element)));
+        return toArray(elements).map<ISerializedElement>((element) => serializer.serialize(element));
     }
 }
