@@ -191,6 +191,7 @@ export default class BrowserTransmitter extends SocketClient implements IWatchMa
         this.emit("watch:data", {
             id: watcherId,
             uid: watcher.userId,
+            watch: (watcher as any).constructor.handles,
             cid: this._consoleId,
             aid: this._amplifierId,
             args

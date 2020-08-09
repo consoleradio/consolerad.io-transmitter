@@ -8,10 +8,6 @@ export default class GetBoundingClientRectCommandHandler implements ICommandHand
     public handle(params: { selector: string; }): ClientRect {
         const element = document.querySelector(params.selector);
 
-        if (!element) {
-            return null;
-        }
-
         return element.getBoundingClientRect();
     }
 }
