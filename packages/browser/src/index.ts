@@ -7,7 +7,7 @@ const context = require.context(__dirname, true, /\.mdl\.ts$/);
 
 async function createTransmitter(consoleId: string): Promise<BrowserTransmitter> {
     if (!consoleId) {
-        throw new TypeError(`'consoleID' is missing.`);
+        throw new TypeError(`'consoleId' is missing.`);
     }
 
     const container = Injex.create({
