@@ -1,0 +1,13 @@
+{
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "start": "lerna run start --stream --parallel",
+    "tsc": "lerna run tsc --stream",
+    "tsc:watch": "lerna run tsc:watch --stream --parallel",
+    "build": "lerna run build --stream --parallel"
+  },
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@consolerad.io/node",
+  "version": "0.0.0",
+  "description": "Now I’m the model of a modern major general / The venerated Virginian veteran whose men are all / Lining up, to put me up on a pedestal / Writin’ letters to relatives / Embellishin’ my elegance and eloquence / But the elephant is in the room / The truth is in ya face when ya hear the British cannons go / BOOM",
+  "keywords": [],
+  "author": {
+    "name": "Udi Talias",
+    "email": "udi.talias@gmail.com",
+    "url": "https://github.com/uditalias"
+  },
+  "license": "MIT",
+  "main": "lib/node.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/consoleradio/consolerad.io-transmitter.git"
+  },
+  "scripts": {},
+  "bugs": {
+    "url": "https://github.com/consoleradio/consolerad.io-transmitter/issues"
+  },
+  "homepage": "https://github.com/consoleradio/consolerad.io-transmitter#readme",
+  "dependencies": {
+    "@consolerad.io/stdlib": "^0.0.0"
+  }
+}
